@@ -7,6 +7,14 @@ body {
     line-height: 1.6;
     position: relative;
     overflow-x: hidden;
+    /* 隐藏滚动条但保持可滚动 */
+    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+}
+
+/* 针对 Webkit 浏览器（Chrome、Safari等）隐藏滚动条 */
+body::-webkit-scrollbar {
+    display: none;
 }
 
 body::before {
@@ -585,4 +593,90 @@ body::after {
 .intro-features i {
     color: #00f5a0;
     font-size: 1.4rem;
+}
+
+/* 添加移动端响应式样式 */
+@media screen and (max-width: 768px) {
+    .nav-content {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .nav-links {
+        margin-top: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .nav-links a {
+        padding: 0.5rem 1rem;
+    }
+
+    .header {
+        padding: 2rem 1rem;
+    }
+
+    .header h1 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+    }
+
+    .header p {
+        font-size: 1rem;
+        margin: 1.5rem 0;
+    }
+
+    .get-started {
+        width: 100%;
+        text-align: center;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+        padding: 2rem 1rem;
+        gap: 1.5rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+        margin: 2% auto;
+    }
+
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+
+    .about-content {
+        flex-direction: column;
+        padding: 2rem 1rem;
+    }
+
+    .left-column, .right-column {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .contact-info {
+        text-align: center;
+    }
+}
+
+/* 优化触摸屏交互 */
+@media (hover: none) {
+    .nav-links a,
+    .get-started,
+    .feature-card,
+    .checkbox-group label {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .get-started:active,
+    .feature-card:active {
+        transform: scale(0.98);
+    }
 }

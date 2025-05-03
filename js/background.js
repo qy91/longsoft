@@ -1,65 +1,119 @@
-const canvas = document.getElementById('background-canvas');
-const ctx = canvas.getContext('2d');
+document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('background-canvas');
+    const ctx = canvas.getContext('2d');
+    let mousePosition = { x: 0, y: 0 };
+    let points = [];
+    const numberOfPoints = 50;
+    const connectionRadius = 150;
+    const pointRadius = 2;
 
-// 设置canvas尺寸
-function setCanvasSize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-setCanvasSize();
-window.addEventListener('resize', setCanvasSize);
-
-// 创建点类
-class Point {
-    constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
+    // 调整画布大小
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     }
 
-    update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
-        if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+    // 初始化点
+    function initPoints() {
+        points = [];
+        for (let i = 0; i < numberOfPoints; i++) {
+            points.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 2,
+                vy: (Math.random() - 0.5) * 2
+            });
+        }
     }
-}
 
-// 创建点阵
-const points = Array.from({ length: 100 }, () => new Point());
+    // 更新点的位置
+    function updatePoints() {
+        points.forEach(point => {
+            point.x += point.vx;
+            point.y += point.vy;
 
-// 动画循环
-function animate() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // 边界检查
+            if (point.x < 0 || point.x > canvas.width) point.vx *= -1;
+            if (point.y < 0 || point.y > canvas.height) point.vy *= -1;
 
-    points.forEach(point => {
-        point.update();
-    });
+            // 与鼠标的互动
+            const dx = mousePosition.x - point.x;
+            const dy = mousePosition.y - point.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
 
-    // 绘制点和线
-    points.forEach((point, i) => {
-        ctx.beginPath();
-        ctx.arc(point.x, point.y, 1, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-        ctx.fill();
-
-        // 连接临近的点
-        points.slice(i + 1).forEach(otherPoint => {
-            const distance = Math.hypot(point.x - otherPoint.x, point.y - otherPoint.y);
-            if (distance < 100) {
-                ctx.beginPath();
-                ctx.moveTo(point.x, point.y);
-                ctx.lineTo(otherPoint.x, otherPoint.y);
-                ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 * (1 - distance / 100)})`;
-                ctx.stroke();
+            if (distance < connectionRadius) {
+                point.vx += (dx / distance) * 0.1;
+                point.vy += (dy / distance) * 0.1;
             }
         });
+    }
+
+    // 绘制点和连线
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // 绘制点之间的连线
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(0, 245, 160, 0.1)';
+        
+        points.forEach((point, i) => {
+            points.forEach((otherPoint, j) => {
+                if (i !== j) {
+                    const dx = point.x - otherPoint.x;
+                    const dy = point.y - otherPoint.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionRadius) {
+                        ctx.moveTo(point.x, point.y);
+                        ctx.lineTo(otherPoint.x, otherPoint.y);
+                    }
+                }
+            });
+
+            // 与鼠标位置连线
+            const mouseDistance = Math.sqrt(
+                Math.pow(point.x - mousePosition.x, 2) + 
+                Math.pow(point.y - mousePosition.y, 2)
+            );
+
+            if (mouseDistance < connectionRadius) {
+                ctx.moveTo(point.x, point.y);
+                ctx.lineTo(mousePosition.x, mousePosition.y);
+            }
+        });
+        
+        ctx.stroke();
+
+        // 绘制点
+        points.forEach(point => {
+            ctx.beginPath();
+            ctx.fillStyle = 'rgba(0, 245, 160, 0.5)';
+            ctx.arc(point.x, point.y, pointRadius, 0, Math.PI * 2);
+            ctx.fill();
+        });
+    }
+
+    // 动画循环
+    function animate() {
+        updatePoints();
+        draw();
+        requestAnimationFrame(animate);
+    }
+
+    // 监听鼠标移动
+    canvas.addEventListener('mousemove', function(e) {
+        mousePosition.x = e.clientX;
+        mousePosition.y = e.clientY;
     });
 
-    requestAnimationFrame(animate);
-}
+    // 监听窗口大小变化
+    window.addEventListener('resize', function() {
+        resizeCanvas();
+        initPoints();
+    });
 
-animate();
+    // 初始化
+    resizeCanvas();
+    initPoints();
+    animate();
+});

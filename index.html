@@ -7,27 +7,73 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="js/background.js" defer></script>
+    <script src="js/modal.js" defer></script>
 </head>
 <body>
     <canvas id="background-canvas"></canvas>
     <nav class="nav">
         <div class="nav-content">
-            <a href="#" class="logo">Long Soft</a>
+            <div class="logo-container">
+                <a href="#" class="logo">Long Soft</a>
+                <span>low-coding software solutions</span>
+            </div>
             <div class="nav-links">
                 <a href="#features">Features</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#documentation">Documentation</a>
-                <!-- <a href="#" class="sign-in">Sign In</a> -->
+                <a href="#" id="pricing-link">Pricing</a>
+                <a href="#about">Contact Us</a>
             </div>
         </div>
     </nav>
 
+    <!-- 修改模态窗口内容为英文 -->
+    <div id="intro-modal" class="modal">
+        <div class="modal-content intro-content">
+            <h2>REQUEST A QUOTE ONLINE</h2>
+            <ul class="intro-features">
+                <li><i class="fas fa-check"></i> UP TO 80% CHEAPER THAN TRADITIONAL ENTERPRISE SOFTWARE</li>
+                <li><i class="fas fa-check"></i> FULLY HOSTED, MAINTAINED AND SUPPORTED SOLUTIONS</li>
+                <li><i class="fas fa-check"></i> SPEAK WITH A REAL SOFTWARE DEVELOPER</li>
+            </ul>
+            <button id="get-quote-btn" class="submit-btn">GET STARTED</button>
+        </div>
+    </div>
+    <div id="pricing-modal" class="modal">
+        <div class="modal-content">
+            <h2>Get Quote</h2>
+            <form id="pricing-form">
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" name="company" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact">Contact Person</label>
+                    <input type="text" id="contact" name="contact" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="requirements">Project Requirements</label>
+                    <textarea id="requirements" name="requirements" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Expected Features (Multiple Choice)</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="features" value="visual"> Visual Development</label>
+                        <label><input type="checkbox" name="features" value="ai"> AI Assistance</label>
+                        <label><input type="checkbox" name="features" value="enterprise"> Enterprise Features</label>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Submit Request</button>
+            </form>
+        </div>
+    </div>
     <header class="header">
         <h1>Building the<br>Future of<br>Low-Code<br>Development</h1>
         <p>Empowering developers and businesses to create powerful applications with minimal coding. Our next-generation platform makes software development accessible to everyone.</p>
         <div class="header-buttons">
-            <a href="#" class="button get-started">Get Started</a>
-            <a href="#" class="button learn-more">Learn More</a>
+            <a href="#" id="pricing-link" class="button get-started">Get Started</a>
         </div>
     </header>
 </body>
@@ -58,19 +104,39 @@
         </div>
     </section>
 
-    <section id="about" class="about-section">
-        <div class="about-content">
-            <h2>About Us</h2>
-            <p>Long Soft is dedicated to providing innovative technology solutions for developers and enterprises. Our mission is to simplify software development processes and improve efficiency through advanced technology and tools.</p>
-        </div>
-    </section>
+
 
     <footer class="footer">
-        <div class="contact-info">
-            <h2>Contact Us</h2>
-            <p>If you have any questions or suggestions, feel free to reach out</p>
-            <p>Email: longsoft@chen.so</p>
-        </div>
+        <section id="about" class="about-section">
+            <div class="about-content">
+                <div class="left-column">
+                    <h3>About Us</h3>
+                    <p>Long Soft is dedicated to providing innovative technology solutions for developers and enterprises. Our mission is to simplify software development processes and improve efficiency through advanced technology and tools.</p>
+                </div>
+                <div class="right-column">
+                    <h3>Contact Us</h3>
+                    <div class="contact-info">
+                        <!-- <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:01217518191">0121 751 8191</a>
+                        </div> -->
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:longsoft@chen.so">longsoft@chen.so</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>APT25,
+                                SIDBURY COURT,
+                                SIDMONTON AVENUE,
+                                BRAY,
+                                CO. WICKLOW.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <p>© 2025 Long Soft Ltd. All rights reserved</p>
     </footer>
 </body>

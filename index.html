@@ -1,40 +1,77 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f2f5;
-        }
-        .container {
-            text-align: center;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #1a73e8;
-            margin-bottom: 10px;
-        }
-        p {
-            color: #5f6368;
-            font-size: 18px;
-        }
-    </style>
+    <title>Long Soft - Building the Future of Low-Code Development</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="js/background.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Hello World</h1>
-        <p>欢迎来到我的第一个网页！</p>
-    </div>
+    <canvas id="background-canvas"></canvas>
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#" class="logo">Long Soft</a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#documentation">Documentation</a>
+                <!-- <a href="#" class="sign-in">Sign In</a> -->
+            </div>
+        </div>
+    </nav>
+
+    <header class="header">
+        <h1>Building the<br>Future of<br>Low-Code<br>Development</h1>
+        <p>Empowering developers and businesses to create powerful applications with minimal coding. Our next-generation platform makes software development accessible to everyone.</p>
+        <div class="header-buttons">
+            <a href="#" class="button get-started">Get Started</a>
+            <a href="#" class="button learn-more">Learn More</a>
+        </div>
+    </header>
+</body>
+</html>
+<section id="features" class="features">
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-palette"></i>
+            </div>
+            <h3>Visual Development</h3>
+            <p>Build applications through intuitive drag-and-drop interfaces and visual workflows.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <h3>AI-Driven Assistance</h3>
+            <p>Leverage artificial intelligence to accelerate development and improve code quality.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-building"></i>
+            </div>
+            <h3>Enterprise Ready</h3>
+            <p>Scalable, secure, and compliant solutions for businesses of all sizes.</p>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="about-content">
+            <h2>About Us</h2>
+            <p>Long Soft is dedicated to providing innovative technology solutions for developers and enterprises. Our mission is to simplify software development processes and improve efficiency through advanced technology and tools.</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="contact-info">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or suggestions, feel free to reach out</p>
+            <p>Email: longsoft@chen.so</p>
+        </div>
+        <p>© 2025 Long Soft Ltd. All rights reserved</p>
+    </footer>
 </body>
 </html>
